@@ -20,8 +20,14 @@ discourse:
     - redis
   environment:
     - RAILS_ENV=production
+    - SECRET_TOKEN=1234HaCkFlEiScH
     - DISCOURSE_REDIS_HOST=redis
     - DISCOURSE_DB_HOST=postgres
     - DISCOURSE_DB_PASSWORD=d15c0ur53
     - DISCOURSE_SERVE_STATIC_ASSETS=true
+    - DISCOURSE_HOSTNAME=discourse.hackfleisch
+    - DISCOURSE_SMTP_ADDRESS=smtp.mandrillapp.com
+    - DISCOURSE_SMTP_PORT=587
+    - DISCOURSE_SMTP_USER_NAME=user
+    - DISCOURSE_SMTP_PASSWORD=apikey
 
