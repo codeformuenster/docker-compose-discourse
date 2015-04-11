@@ -4,7 +4,7 @@ Proof of concept, there will be errors, please test! :)
 
     $ sudo docker-compose build
 
-    $ sudo docker-compose run discourse sleep 3 && rake db:migrate assets:precompile
+    $ sudo docker-compose run discourse bash -c "sleep 3 && rake db:migrate assets:precompile"
 
 Provide some configuration via environment variables in `docker-compose.yml`:
 
