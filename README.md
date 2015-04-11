@@ -1,1 +1,20 @@
 # docker-compose-discourse
+
+Proof of concept, there will be errors, please test! :)
+
+    $ sudo docker-compose build
+
+    $ sudo docker-compose run discourse sleep 3 && rake db:migrate assets:precompile
+
+Provide some configuration via environment variables in `docker-compose.yml`:
+
+    DISCOURSE_HOSTNAME=
+    DISCOURSE_SMTP_ADDRESS=
+    DISCOURSE_SMTP_PORT=587
+    DISCOURSE_SMTP_USER_NAME=
+    DISCOURSE_SMTP_PASSWORD=
+    DISCOURSE_DEVELOPER_EMAILS=
+
+    $ sudo docker-compose up
+
+    $ xdg-open http://localhost:3000/
