@@ -1,5 +1,36 @@
-redis:
-  image: redis:2.6
+discourse:
+  image: codeformuenster/discourse
+  ports:
+    - "3000:3000"
+  volumes:
+    - discourse/assets:/usr/src/app/public/assets
+  links:
+    - postgres
+    - redis
+  environment:
+    - SECRET_TOKEN=1234HaCkFlEiScH
+    - DISCOURSE_DB_PASSWORD=d15c0ur53
+    - DISCOURSE_HOSTNAME=discourse.hackfleisch
+    - DISCOURSE_SMTP_ADDRESS=smtp.mandrillapp.com
+    - DISCOURSE_SMTP_PORT=587
+    - DISCOURSE_SMTP_USER_NAME=user
+    - DISCOURSE_SMTP_PASSWORD=apikey
+
+sidekiq:
+  image: codeformuenster/discourse
+  command: sidekiq -c 3 -v
+  links:
+    - postgres
+    - redis
+  environment:
+    - SECRET_TOKEN=1234HaCkFlEiScH
+    - DISCOURSE_DB_PASSWORD=d15c0ur53
+    - DISCOURSE_HOSTNAME=discourse.hackfleisch
+    - DISCOURSE_SMTP_ADDRESS=smtp.mandrillapp.com
+    - DISCOURSE_SMTP_PORT=587
+    - DISCOURSE_SMTP_USER_NAME=user
+    - DISCOURSE_SMTP_PASSWORD=apikey
+    - DISCOURSE_DEVELOPER_EMAILS=CONFIGURE_ME
 
 postgres:
   image: postgres:9.4
@@ -7,48 +38,7 @@ postgres:
     - POSTGRES_PASSWORD=d15c0ur53
     - POSTGRES_USER=discourse
   volumes:
-    - ./pg_data:/var/lib/postgresql/data
+    - postgres/data:/var/lib/postgresql/data
 
-discourse:
-  build: .
-  ports:
-    - "3000:3000"
-  volumes:
-    - ./public/assets:/usr/src/app/public/assets
-  links:
-    - postgres
-    - redis
-#    - sidekiq
-  environment:
-    - RAILS_ENV=production
-    - SECRET_TOKEN=1234HaCkFlEiScH
-    - DISCOURSE_REDIS_HOST=redis
-    - DISCOURSE_DB_HOST=postgres
-    - DISCOURSE_DB_PASSWORD=d15c0ur53
-    - DISCOURSE_SERVE_STATIC_ASSETS=true
-    - DISCOURSE_HOSTNAME=discourse.hackfleisch
-    - DISCOURSE_SMTP_ADDRESS=smtp.mandrillapp.com
-    - DISCOURSE_SMTP_PORT=587
-    - DISCOURSE_SMTP_USER_NAME=user
-    - DISCOURSE_SMTP_PASSWORD=apikey
-    - DISCOURSE_DEVELOPER_EMAILS=webwurst@gmail.com
-
-sidekiq:
-  build: .
-  command: sidekiq -c 3 -v
-  links:
-    - postgres
-    - redis
-  environment:
-    - RAILS_ENV=production
-    - SECRET_TOKEN=1234HaCkFlEiScH
-    - DISCOURSE_REDIS_HOST=redis
-    - DISCOURSE_DB_HOST=postgres
-    - DISCOURSE_DB_PASSWORD=d15c0ur53
-    - DISCOURSE_SERVE_STATIC_ASSETS=true
-    - DISCOURSE_HOSTNAME=discourse.hackfleisch
-    - DISCOURSE_SMTP_ADDRESS=smtp.mandrillapp.com
-    - DISCOURSE_SMTP_PORT=587
-    - DISCOURSE_SMTP_USER_NAME=user
-    - DISCOURSE_SMTP_PASSWORD=apikey
-    - DISCOURSE_DEVELOPER_EMAILS=webwurst@gmail.com
+redis:
+  image: redis:2.6
