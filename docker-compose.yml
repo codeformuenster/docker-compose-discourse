@@ -1,0 +1,27 @@
+redis:
+  image: redis:2.6
+
+postgres:
+  image: postgres:9.4
+  environment:
+    - POSTGRES_PASSWORD=d15c0ur53
+    - POSTGRES_USER=discourse
+  volumes:
+    - ./pg_data:/var/lib/postgresql/data
+
+discourse:
+  build: .
+  ports:
+    - "3000:3000"
+  volumes:
+    - ./public/assets:/usr/src/app/public/assets
+  links:
+    - postgres
+    - redis
+  environment:
+    - RAILS_ENV=production
+    - DISCOURSE_REDIS_HOST=redis
+    - DISCOURSE_DB_HOST=postgres
+    - DISCOURSE_DB_PASSWORD=d15c0ur53
+    - DISCOURSE_SERVE_STATIC_ASSETS=true
+
