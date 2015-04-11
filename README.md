@@ -15,6 +15,8 @@ Provide some configuration via environment variables in `docker-compose.yml`:
     DISCOURSE_SMTP_PASSWORD=
     DISCOURSE_DEVELOPER_EMAILS=
 
+Start Discourse:
+
     $ sudo docker-compose up
 
     $ xdg-open http://localhost:3000/
