@@ -2,7 +2,10 @@ FROM rails
 
 WORKDIR /usr/src/app
 
-RUN git clone https://github.com/discourse/discourse.git . \
+ENV DISCOURSE_VERSION 1.2.2
+
+RUN curl -L https://github.com/discourse/discourse/archive/v${DISCOURSE_VERSION}.tar.gz \
+  | tar -xz -C /usr/src/app --strip-components 1 \
   && bundle install --deployment --without test --without development
 
 RUN apt-get update && apt-get install -y --no-install-recommends imagemagick libxml2 \
