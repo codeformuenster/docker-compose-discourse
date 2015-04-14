@@ -8,7 +8,7 @@ discourse:
     - postgres
     - redis
   environment:
-    - SECRET_TOKEN=1234HaCkFlEiScH
+    - SECRET_TOKEN=1234HaCkFlEiScH1234HaCkFlEiScH1234HaCkFlEiScH
     - DISCOURSE_DB_PASSWORD=d15c0ur53
     - DISCOURSE_HOSTNAME=discourse.hackfleisch
     - DISCOURSE_SMTP_ADDRESS=smtp.mandrillapp.com
