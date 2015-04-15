@@ -21,9 +21,8 @@ sidekiq:
 
 postgres:
   image: postgres:9.4
-  environment:
-    - POSTGRES_PASSWORD=d15c0ur53
-    - POSTGRES_USER=discourse
+  env_file:
+    - discourse_env
   volumes:
     - postgres/data:/var/lib/postgresql/data
 
