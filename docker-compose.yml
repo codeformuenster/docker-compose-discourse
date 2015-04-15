@@ -21,6 +21,8 @@ sidekiq:
 
 postgres:
   image: postgres:9.4
+  environment:
+    - POSTGRES_USER=discourse
   env_file:
     - .env
   volumes:
