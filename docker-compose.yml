@@ -8,7 +8,7 @@ discourse:
     - postgres
     - redis
   env_file:
-    - discourse_env
+    - .env
 
 sidekiq:
   image: codeformuenster/discourse
@@ -17,12 +17,12 @@ sidekiq:
     - postgres
     - redis
   env_file:
-    - discourse_env
+    - .env
 
 postgres:
   image: postgres:9.4
   env_file:
-    - discourse_env
+    - .env
   volumes:
     - postgres/data:/var/lib/postgresql/data
 
