@@ -7,14 +7,8 @@ discourse:
   links:
     - postgres
     - redis
-  environment:
-    - SECRET_TOKEN=1234HaCkFlEiScH1234HaCkFlEiScH1234HaCkFlEiScH
-    - DISCOURSE_DB_PASSWORD=d15c0ur53
-    - DISCOURSE_HOSTNAME=discourse.hackfleisch
-    - DISCOURSE_SMTP_ADDRESS=smtp.mandrillapp.com
-    - DISCOURSE_SMTP_PORT=587
-    - DISCOURSE_SMTP_USER_NAME=user
-    - DISCOURSE_SMTP_PASSWORD=apikey
+  env_file:
+    - discourse_env
 
 sidekiq:
   image: codeformuenster/discourse
@@ -22,15 +16,8 @@ sidekiq:
   links:
     - postgres
     - redis
-  environment:
-    - SECRET_TOKEN=1234HaCkFlEiScH
-    - DISCOURSE_DB_PASSWORD=d15c0ur53
-    - DISCOURSE_HOSTNAME=discourse.hackfleisch
-    - DISCOURSE_SMTP_ADDRESS=smtp.mandrillapp.com
-    - DISCOURSE_SMTP_PORT=587
-    - DISCOURSE_SMTP_USER_NAME=user
-    - DISCOURSE_SMTP_PASSWORD=apikey
-    - DISCOURSE_DEVELOPER_EMAILS=CONFIGURE_ME
+  env_file:
+    - discourse_env
 
 postgres:
   image: postgres:9.4
