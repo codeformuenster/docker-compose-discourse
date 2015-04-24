@@ -4,6 +4,7 @@ discourse:
     - "3000:3000"
   volumes:
     - discourse/assets:/usr/src/app/public/assets
+    - discourse/uploads:/usr/src/app/public/uploads
   links:
     - postgres
     - redis
