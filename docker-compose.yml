@@ -5,6 +5,7 @@ discourse:
   volumes:
     - discourse/assets:/usr/src/app/public/assets
     - discourse/uploads:/usr/src/app/public/uploads
+    - discourse/backups:/usr/src/app/public/backups
   links:
     - postgres
     - redis
