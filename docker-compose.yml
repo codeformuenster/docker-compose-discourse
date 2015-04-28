@@ -20,6 +20,8 @@ sidekiq:
     - redis
   env_file:
     - .env
+  volumes_from:
+    - discourse
 
 postgres:
   image: postgres:9.4
