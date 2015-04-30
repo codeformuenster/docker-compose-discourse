@@ -30,6 +30,7 @@ On firstrun:
     $ ./conman -c discourse_conman_firstrun.yml -j (cat discourse_conf.json | jq -c .)
 
 Then:
+
     $ ./conman -c discourse_conman.yml -j (cat discourse_conf.json | jq -c .)
 
     $ xdg-open http://localhost:3000/
