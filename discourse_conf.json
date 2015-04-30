@@ -1,0 +1,16 @@
+{
+  "discourse": {
+    "secret": "5up3r53cr37d15c0ur5353cr3770k3n",
+    "hostname": "local.discourse",
+    "smtp": {
+      "address": "smtp.mandrillapp.com",
+      "port": "587",
+      "user": "smtp_user",
+      "password": "apitoken"
+    },
+    "developer_emails": "mail@local.discourse",
+    "database": {
+      "password": "d15c0ur53"
+    }
+  }
+}

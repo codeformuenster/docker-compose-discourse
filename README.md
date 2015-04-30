@@ -2,21 +2,34 @@
 
 Proof of concept, there will be errors, please test! :)
 
-    $ sudo docker-compose build
+Check out [conman](https://github.com/BlueDragonX/conman)! And maybe [jq](http://stedolan.github.io/jq/).
 
-    $ sudo docker-compose run discourse bash -c "sleep 3 && rake db:migrate assets:precompile"
+Edit some configuration in `discourse_conf.json`:
 
-Provide some configuration via environment variables in `docker-compose.yml`:
+```json
+{
+  "discourse": {
+    "secret": "5up3r53cr37d15c0ur5353cr3770k3n",
+    "hostname": "local.discourse",
+    "smtp": {
+      "address": "smtp.mandrillapp.com",
+      "port": "587",
+      "user": "smtp_user",
+      "password": "apitoken"
+    },
+    "developer_emails": "mail@local.discourse",
+    "database": {
+      "password": "d15c0ur53"
+    }
+  }
+}
+```
 
-    DISCOURSE_HOSTNAME=
-    DISCOURSE_SMTP_ADDRESS=
-    DISCOURSE_SMTP_PORT=587
-    DISCOURSE_SMTP_USER_NAME=
-    DISCOURSE_SMTP_PASSWORD=
-    DISCOURSE_DEVELOPER_EMAILS=
+On firstrun:
 
-Start Discourse:
+    $ ./conman -c discourse_conman_firstrun.yml -j (cat discourse_conf.json | jq -c .)
 
-    $ sudo docker-compose up
+Then:
+    $ ./conman -c discourse_conman.yml -j (cat discourse_conf.json | jq -c .)
 
     $ xdg-open http://localhost:3000/

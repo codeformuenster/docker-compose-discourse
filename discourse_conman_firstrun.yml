@@ -1,0 +1,33 @@
+# An initial context object to start with.
+# Put defaults here
+context:
+  discourse:
+    database:
+      user: discourse
+
+# Templates to render. The key is the destination and the value is the source.
+#templates:
+#  example.txt: example.tpl
+
+# Update the environment. Values are templated.
+env:
+- SECRET_TOKEN={{ .discourse.secret }}
+- DISCOURSE_HOSTNAME={{ .discourse.hostname }}
+- DISCOURSE_SMTP_ADDRESS={{ .discourse.smtp.address }}
+- DISCOURSE_SMTP_PORT={{ .discourse.smtp.port }}
+- DISCOURSE_SMTP_USER_NAME={{ .discourse.smtp.user }}
+- DISCOURSE_SMTP_PASSWORD={{ .discourse.smtp.password }}
+- DISCOURSE_DEVELOPER_EMAILS={{ .discourse.developer_emails }}
+- POSTGRES_USER={{ .discourse.database.user }}
+- POSTGRES_PASSWORD={{ .discourse.database.password }}
+- DISCOURSE_DB_PASSWORD={{ .discourse.database.password }}
+
+# Configure the executable to launch. Arguments may use Go template syntax. The
+# context is the same as for templates.
+exec:
+- /usr/local/bin/docker-compose
+- run
+- discourse
+- bash
+- -c
+- "sleep 3 && rake db:migrate assets:precompile"

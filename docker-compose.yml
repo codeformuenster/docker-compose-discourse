@@ -2,6 +2,15 @@ discourse:
   image: codeformuenster/discourse
   ports:
     - "3000:3000"
+  environment:
+    - SECRET_TOKEN
+    - DISCOURSE_HOSTNAME
+    - DISCOURSE_SMTP_ADDRESS
+    - DISCOURSE_SMTP_PORT
+    - DISCOURSE_SMTP_USER_NAME
+    - DISCOURSE_SMTP_PASSWORD
+    - DISCOURSE_DEVELOPER_EMAILS
+    - DISCOURSE_DB_PASSWORD
   volumes:
     - discourse/assets:/usr/src/app/public/assets
     - discourse/uploads:/usr/src/app/public/uploads
@@ -9,26 +18,30 @@ discourse:
   links:
     - postgres
     - redis
-  env_file:
-    - .env
 
 sidekiq:
   image: codeformuenster/discourse
   command: sidekiq -c 3 -v
+  environment:
+    - SECRET_TOKEN
+    - DISCOURSE_HOSTNAME
+    - DISCOURSE_SMTP_ADDRESS
+    - DISCOURSE_SMTP_PORT
+    - DISCOURSE_SMTP_USER_NAME
+    - DISCOURSE_SMTP_PASSWORD
+    - DISCOURSE_DEVELOPER_EMAILS
+    - DISCOURSE_DB_PASSWORD
+  volumes_from:
+    - discourse
   links:
     - postgres
     - redis
-  env_file:
-    - .env
-  volumes_from:
-    - discourse
 
 postgres:
   image: postgres:9.4
   environment:
-    - POSTGRES_USER=discourse
-  env_file:
-    - .env
+    - POSTGRES_USER
+    - POSTGRES_PASSWORD
   volumes:
     - postgres/data:/var/lib/postgresql/data
 
