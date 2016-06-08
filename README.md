@@ -1,3 +1,5 @@
+/!\ This is no longer maintained, if you want to use a setup that is used in production, please head to [indiehosters/discourse](https://github.com/indiehosters/discourse) /!\
+
 # docker-compose-discourse
 
 Proof of concept, there will be errors, please test! :)
